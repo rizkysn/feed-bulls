@@ -1,0 +1,29 @@
+<script>
+	(function () {
+	var r = Raphael("holder"),
+	    fin = function () {
+	        this.flag = r.popup(this.bar.x, this.bar.y, this.bar.value || "0").insertBefore(this);
+	    },
+	    fout = function () {
+	        this.flag.animate({opacity: 0}, 300, function () {this.remove();});
+	    },
+	    fin2 = function () {
+	        var y = [], res = [];
+	        for (var i = this.bars.length; i--;) {
+	            y.push(this.bars[i].y);
+	            res.push(this.bars[i].value || "0");
+	        }
+	        this.flag = r.popup(this.bars[0].x, Math.min.apply(Math, y), res.join(", ")).insertBefore(this);
+	    },
+	    fout2 = function () {
+	        this.flag.animate({opacity: 0}, 300, function () {this.remove();});
+	    },
+	    txtattr = { font: "20px sans-serif" };
+
+	r.text(100, 10, "Multiple Series Chart").attr(txtattr);
+	r.hbarchart(10, 30, 450, 250, [[55], [10]]).hover(fin, fout);
+})();
+</script>
+<div id="emotion-charts"></div>
+
+<div id="holder"></div>
